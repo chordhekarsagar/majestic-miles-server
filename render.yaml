@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: majestic-miles-server
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: CLIENT_ORIGIN        # your Vercel URL, e.g. https://majestic-miles.vercel.app
+        sync: false
+      - key: PUBLIC_API_URL       # this service's URL + /api, e.g. https://majestic-miles-server.onrender.com/api
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: GOOGLE_APPLICATION_CREDENTIALS
+        value: /etc/secrets/google-service-account.json   # upload the JSON as a Render Secret File with this name
